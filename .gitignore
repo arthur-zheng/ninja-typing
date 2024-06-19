@@ -3,3 +3,6 @@
 
 # Ignore node_modules directory in any folder
 node_modules/
+
+# Ignore .next folder
+.next/
