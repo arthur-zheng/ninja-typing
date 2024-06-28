@@ -1,0 +1,11 @@
+{
+    "words": [
+      {
+        "id": 1,
+        "word": "Shuriken",
+        "image_url": "s3://url/object",
+        "complexity": 3
+      }
+    ]
+  }
+  
