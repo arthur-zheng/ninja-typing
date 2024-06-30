@@ -16,7 +16,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 # Add CORS middleware
-# Remove when we are requesting from FE server
+# Remove after we are requesting from FE server
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allows all origins
