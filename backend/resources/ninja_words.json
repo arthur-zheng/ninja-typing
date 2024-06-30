@@ -1,11 +1,34 @@
 {
-    "words": [
-      {
-        "id": 1,
-        "word": "Shuriken",
-        "image_url": "s3://url/object",
-        "complexity": 3
-      }
-    ]
-  }
-  
+  "words": [
+    {
+      "id": 1,
+      "word": "Shuriken",
+      "image_url": "s3://url/object",
+      "complexity": 3
+    },
+    {
+      "id": 2,
+      "word": "Shinobi",
+      "image_url": "s3://url/object",
+      "complexity": 3
+    },
+    {
+      "id": 3,
+      "word": "Samurai",
+      "image_url": "s3://url/object",
+      "complexity": 3
+    },
+    {
+      "id": 4,
+      "word": "Dragon",
+      "image_url": "s3://url/object",
+      "complexity": 2
+    },
+    {
+      "id": 5,
+      "word": "Only a ninja can stop a ninja.",
+      "image_url": "s3://url/object",
+      "complexity": 5
+    }
+  ]
+}
