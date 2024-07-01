@@ -17,7 +17,7 @@ export default function WordCard({
     return <Text>{"loading"}</Text>;
   }
   return (
-    <Box display="flex" alignItems="center">
+    <Box display="flex" alignItems="start">
       {word.split("").map((char, index) => {
         let color = "#ddd";
         if (index < typingStream.length) {
@@ -25,7 +25,12 @@ export default function WordCard({
         }
 
         return (
-          <LetterCard key={index} color={color} letter={char}></LetterCard>
+          <LetterCard
+            key={index}
+            color={color}
+            letter={char}
+            isCurrent={index === letterIndex}
+          ></LetterCard>
         );
       })}
     </Box>
