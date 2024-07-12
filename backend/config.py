@@ -1,0 +1,4 @@
+TYPING_WPM_THRESHOLD = 30  # Default WPM threshold to compute the level
+TYPING_MIN_LEVEL = 1
+TYPING_MAX_LEVEL = 5
+SCORE_DECAY_FACTOR = 0.98

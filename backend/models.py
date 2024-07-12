@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from datetime import datetime
+from uuid import UUID
 
 class WordPayload(BaseModel):
     id: int
@@ -12,3 +14,10 @@ class ParagraphePayload(BaseModel):
     length: int
     image_url: str
     complexity: int
+
+class TypingScorePayload(BaseModel):
+    session_id: UUID
+    wpm: float
+    typing_duration: float
+    level: int
+    timestamp: datetime
