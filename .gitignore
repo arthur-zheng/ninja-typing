@@ -6,3 +6,9 @@ node_modules/
 
 # Ignore .next folder
 .next/
+
+# Ignore Python bytecode files
+backend/__pycache__/
+
+# Ignore virtual environment
+.venv/
