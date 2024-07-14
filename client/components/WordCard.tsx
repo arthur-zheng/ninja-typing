@@ -4,17 +4,17 @@ import LetterCard from "./LetterCard";
 
 export default function WordCard({
   word,
-  image_url,
+  imageUrl,
   letterIndex,
   typingStream,
 }: Readonly<{
   word: string;
-  image_url: string;
+  imageUrl: string;
   letterIndex: number;
   typingStream: string[];
 }>) {
   if (!word) {
-    return <Text>{"loading"}</Text>;
+    return <Text>{"..."}</Text>;
   }
   return (
     <Box display="flex" alignItems="start">
@@ -25,12 +25,15 @@ export default function WordCard({
         }
 
         return (
-          <LetterCard
-            key={index}
-            color={color}
-            letter={char}
-            isCurrent={index === letterIndex}
-          ></LetterCard>
+          <>
+            {imageUrl && <img src={imageUrl} alt="" />}
+            <LetterCard
+              key={index}
+              color={color}
+              letter={char}
+              isCurrent={index === letterIndex}
+            />
+          </>
         );
       })}
     </Box>

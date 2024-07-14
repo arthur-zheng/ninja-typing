@@ -7,7 +7,7 @@ type DebugAreaProps = {
 
 const formatValue = (value: any) => {
   if (Array.isArray(value)) {
-    return JSON.stringify(value);
+    return value.map((v) => JSON.stringify(v)).join("\n\n");
   }
   return JSON.stringify(value, null, 2);
 };
@@ -18,8 +18,8 @@ const DebugArea = (props: DebugAreaProps) => {
       position="fixed"
       bottom
       left
-      padding={4}
-      margin={4}
+      padding={2}
+      margin={2}
       rounding={2}
       overflow="auto"
       maxHeight="50vh"
