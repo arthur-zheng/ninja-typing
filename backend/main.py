@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from backend.models import WordPayload, TypingScorePayload
 from backend import config
-import json
+import json, math
 import logging
 from uuid import UUID
 from datetime import datetime, timezone
@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 
 logging.basicConfig(level=logging.INFO)
 
-word_list: dict[str, WordPayload] = {}
+words_group_by_level: dict[int, list[WordPayload]] = {}
 
 typing_scores: dict[UUID, list[TypingScorePayload]] = {}
 
@@ -39,21 +39,27 @@ app.add_middleware(
 
 def load_words_from_json(file_path: str):
     with open(file_path, 'r') as file:
-        data  = json.load(file)
-        for word_data in data["words"]:
-            word = word_data["word"]
-            word_list[word] = WordPayload(**word_data)
-    logging.info(f"words load done! Length of word_list: {len(word_list)}")
+        data = json.load(file)
+        words = data.get("words", [])
+        for word in words:
+            word_payload = WordPayload(**word)
+            level = word_payload.level
+
+            if level not in words_group_by_level:
+                words_group_by_level[level] = []
+
+            words_group_by_level[level].append(word_payload)
+    logging.info(f"words load done! Size of words_group_by_level: {len(words_group_by_level)}")
 
 
 # Typing word APIs
 @app.get("/words")
-def list_words() -> dict[str, WordPayload]:
-    return word_list
+def list_all_words() -> dict[int, list[WordPayload]]:
+    return words_group_by_level
 
-@app.get("/words/{word}")
-def get_word(word: str):
-    return word_list.get(word, {"error": "Word not found"})
+@app.get("/words/{level}")
+def get_words_by_level(level: float):
+    return words_group_by_level.get(math.ceil(level), {"error": "Level not recognized"})
 
 
 # Typing score APIs

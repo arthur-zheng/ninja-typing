@@ -4,31 +4,31 @@
       "id": 1,
       "word": "Shuriken",
       "image_url": "s3://url/object",
-      "complexity": 3
+      "level": 3
     },
     {
       "id": 2,
       "word": "Shinobi",
       "image_url": "s3://url/object",
-      "complexity": 3
+      "level": 3
     },
     {
       "id": 3,
       "word": "Samurai",
       "image_url": "s3://url/object",
-      "complexity": 3
+      "level": 3
     },
     {
       "id": 4,
       "word": "Dragon",
       "image_url": "s3://url/object",
-      "complexity": 2
+      "level": 2
     },
     {
       "id": 5,
       "word": "Only a ninja can stop a ninja.",
       "image_url": "s3://url/object",
-      "complexity": 5
+      "level": 5
     }
   ]
 }
