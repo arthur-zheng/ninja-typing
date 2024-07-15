@@ -90,7 +90,7 @@ def get_level_recommendation(session_id: UUID):
 
     # Calculate average WPM with decayed factor
     # e.g., {wpm, level} with {20, 1}, {50, 1} derives {35, 1} with no decay
-    # but {wpm, level, age_min} with {20, 1, 5}, {50, 1, 1} derives {(20*0.9+50)/1.9, 1} with no decay
+    # but {wpm, level, age_min} with {20, 1, 5}, {50, 1, 1} derives {(20*0.9+50)/1.9, 1} with decay so the recent result has higher weight
     scores = typing_scores[session_id]
     current_time = datetime.now(timezone.utc)
 
