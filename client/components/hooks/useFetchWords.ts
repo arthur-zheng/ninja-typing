@@ -20,6 +20,7 @@ export const useFetchWords = () => {
         const response = await axios.get<{ [key: string]: Word }>(
           "http://localhost:8000/words"
         );
+        console.log(response.data);
         // map -> array
         setWordsData(
           Object.values(response.data).map((wordObject) => ({

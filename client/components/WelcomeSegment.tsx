@@ -4,10 +4,13 @@ import { Flex, Text, Heading } from "gestalt";
 import { Words } from "@/components/types/Word";
 import { useRouter } from "next/navigation";
 import { Container } from "./Container";
+import { useFetchWords } from "@/components/hooks/useFetchWords";
+
+const WELCOME_WORD = [{ word: "go" }];
 
 const WelcomeSegment = () => {
   const router = useRouter();
-  const [words] = useState<Words>([{ word: "go" }]);
+  const [words] = useState<Words>();
 
   return (
     <Container>
@@ -17,7 +20,7 @@ const WelcomeSegment = () => {
           Hey Welcome Ninja, Ready for some training? Type below:
         </Text>
         <TypingField
-          wordsData={words}
+          wordsData={WELCOME_WORD}
           onFinish={() => router.push("/typing")}
         />
       </Flex>

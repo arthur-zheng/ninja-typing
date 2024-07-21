@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import WordCard from "@/components/WordCard";
 import DebuggingZone from "@/components/_debuggingZone";
 import { isIgnoredKey } from "@/utils/keys";
-import { Words } from "@/components/types/Word";
+import { Word } from "@/components/types/Word";
 
 /*
  * The main component that listens to user input and renders the word
@@ -14,10 +14,10 @@ export default function TypingField({
   wordsData,
   onFinish,
 }: {
-  wordsData: Words;
+  wordsData: Word[];
   onFinish: () => void;
 }) {
-  const [words, setWords] = useState<Words>([]);
+  const [words, setWords] = useState<Word[]>([]);
   const [wordIndex, setWordIndex] = useState<number>(0);
   const [charIndex, setCharIndex] = useState<number>(0);
   const [typingStream, setTypingStream] = useState<string[]>([]);
@@ -59,7 +59,8 @@ export default function TypingField({
   return (
     <>
       <WordCard
-        word={words[wordIndex]?.word}
+        key={wordIndex}
+        word={words[wordIndex]?.word || ""}
         imageUrl={wordsData[wordIndex]?.image_url || ""}
         letterIndex={charIndex}
         typingStream={typingStream}
