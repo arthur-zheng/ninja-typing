@@ -6,6 +6,7 @@ import WordCard from "@/components/WordCard";
 import DebuggingZone from "@/components/_debuggingZone";
 import { isIgnoredKey } from "@/utils/keys";
 import { Word } from "@/components/types/Word";
+import { usePerf } from "@/components/hooks/PerfContext";
 
 /*
  * The main component that listens to user input and renders the word
@@ -18,9 +19,13 @@ export default function TypingField({
   onFinish: () => void;
 }) {
   const [words, setWords] = useState<Word[]>([]);
+  // Typing related
   const [wordIndex, setWordIndex] = useState<number>(0);
   const [charIndex, setCharIndex] = useState<number>(0);
   const [typingStream, setTypingStream] = useState<string[]>([]);
+  // Perf related
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const { setWpm } = usePerf();
 
   useEffect(() => {
     setWords(wordsData);
@@ -39,6 +44,9 @@ export default function TypingField({
         setTypingStream((prev) => [...prev, e.key]);
         setCharIndex((prev) => prev + 1);
       }
+      if (startTime === null) {
+        setStartTime(Date.now());
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -47,6 +55,15 @@ export default function TypingField({
   useEffect(() => {
     // 下一词
     if (words[wordIndex] && charIndex >= words[wordIndex].word.length) {
+      // calculate wps
+      const endTime = Date.now();
+      if (startTime !== null) {
+        const durationInSeconds = (endTime - startTime) / 1000;
+        const wps = words[wordIndex].word.length / durationInSeconds;
+        setWpm(Math.floor(wps / 60));
+        setStartTime(null); // Reset start time for the next word
+      }
+
       if (wordIndex + 1 >= words.length) {
         onFinish();
       }
@@ -65,12 +82,12 @@ export default function TypingField({
         letterIndex={charIndex}
         typingStream={typingStream}
       />
-      <DebuggingZone
+      {/* <DebuggingZone
         wordsList={words}
         wordIndex={`${wordIndex}/${words.length}`}
         charIndex={charIndex}
         typingStream={typingStream}
-      />
+      /> */}
     </>
   );
 }

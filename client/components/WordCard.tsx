@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "gestalt";
+import { Box } from "gestalt";
 import LetterCard from "./LetterCard";
 
 export default function WordCard({
@@ -13,12 +13,14 @@ export default function WordCard({
   letterIndex: number;
   typingStream: string[];
 }>) {
+  const wordOrSentense = word.indexOf(" ") === -1 ? word.toLowerCase() : word;
+
   if (!word) {
-    return <Text>{"..."}</Text>;
+    return <></>;
   }
   return (
     <Box display="flex" alignItems="start">
-      {word.split("").map((char, index) => {
+      {wordOrSentense.split("").map((char, index) => {
         let color = "#ddd";
         if (index < typingStream.length) {
           color = typingStream[index] === char ? "black" : "red";

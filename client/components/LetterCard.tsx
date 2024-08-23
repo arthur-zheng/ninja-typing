@@ -1,4 +1,4 @@
-import { Flex } from "gestalt";
+import { heyComicFont } from "@/components/fonts";
 
 export default function LetterCard({
   letter,
@@ -13,16 +13,13 @@ export default function LetterCard({
     return <pre>🚫</pre>;
   }
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      gap={2}
+    <div
+      className={`${heyComicFont.className} flex flex-col items-center justify-center gap-2`}
     >
-      <pre style={{ color: color, fontSize: "4em" }}>
+      <div style={{ color: color }} className="text-8xl">
         {color === "red" && letter === " " ? "_" : letter}
-      </pre>
+      </div>
       {isCurrent && <div className="current-dot"></div>}
-    </Flex>
+    </div>
   );
 }

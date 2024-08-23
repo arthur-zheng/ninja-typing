@@ -3,6 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "gestalt/dist/gestalt.css";
 import Providers from "./providers";
+import localFont from "next/font/local";
+
+// Font files can be colocated inside of `app`
+const heyComicFont = localFont({
+  src: "./hey_comic.otf",
+  display: "swap",
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={heyComicFont.className}>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>
